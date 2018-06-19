@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CryptoShop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="A shop which you can buy things with your crypto-currency">
+    <meta name="keywords" content="cryptoshop, crypto, currency, bitcoin, btc, eth">
+    <link href="src/images/icon.ico" rel="shortcut icon">
+    <script src="src/js/jquery-3.3.1.min.js"></script>
+    <script src="src/js/vue.js"></script>
+    <script src="src/semantic-ui/semantic.min.js"></script>
+    <link rel="stylesheet" href="src/semantic-ui/semantic.min.css" />
+    <script src="src/js/jquery.flexdatalist.min.js"></script>
+    <link rel="stylesheet" href="src/css/jquery.flexdatalist.min.css" />
+    <script src="src/semantic-ui/components/dropdown.min.js"></script>
+    <link rel="stylesheet" href="src/semantic-ui/components/dropdown.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+    <!--- Semantic UI lib CSS -->
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/site.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/container.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/header.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/image.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/menu.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/list.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="src/semantic-ui/components/icon.css">
+    <!-- Semantic UI lib Javascript -->
+    <script src="src/semantic-ui/components/site.js"></script>
+    <script src="src/semantic-ui/components/dropdown.js"></script>
+    <script src="src/js/function.js"></script>
+    <script>
+    </script>
+    <style>
+        a.copyright:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1), 0 0 40px #00ffff, 0 0 70px #00ffff, 0 0 80px #00ffff, 0 0 100px #00ffff;
+        }
+    </style>
+</head>
+<header>
+
+    <div class="ui fixed top inverted red menu">
+        <div class="ui container">
+            <a href="#" class="header item" onclick="homepage()">
+                <img class="logo" src="src/images/logo.png"> CryptoShop
+            </a>
+            <div class="item">
+                <div class="ui action icon input" id="searchBox">
+                    <input type="text" placeholder="Search..." id="searchInput">
+                    <select name="searchType" id="searchType" class="ui selection dropdown">
+                        <option value="">Select category</option>
+                        <option value="All">All type</option>
+                        <option v-for="item in items" :value="item.name">{{item.name}}</option>
+                    </select>
+                    <script>
+                        var appForList1 = new Vue({
+                            el: '#searchType',
+                            data: {
+                                items: categoriesList
+                            }
+                        });
+                    </script>
+                    <button class="ui icon button" onclick="searchItem()"><i class="ui search icon"></i></button>
+
+                </div>
+            </div>
+            <div class="item">
+                <i class="ui big outline clock icon"></i>
+                <div id="timer" style="font-size: 1.6em;">
+
+                </div>
+                <script>
+                    setInterval(function() {
+                        getTime()
+                    }, 999);
+
+                    function getTime() {
+                        var date = new Date();
+                        timer.innerText = date.toTimeString().slice(0, 8);
+                    }
+                </script>
+            </div>
+            <div class="right floated item" id="cartCount">
+                <button class="ui red button">
+                    <i class="ui cart icon"></i> Cart
+                    <div class="floating ui teal label" id="counterrr">{{counter}}</div>
+                </button>
+                <div class="ui popup top left transition hidden" style="min-width: 500px;">
+                    <div class="ui divided list scrollable" id="inCart">
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui right floated green button" id="checkOut" onclick="showModal()">Checkout</div>
+                </div>
+                <div class="ui yellow basic label">
+                    <i class="ui bitcoin icon"></i>{{total}}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</header>
+<modal id="hiddenModal" class="ui modal">
+    <div class="ui raised very padded text main container segment">
+        <div class="ui bottom right attached label">Press ESC to hide modal</div>
+        <form class="ui form" action="checkout.jsp" method="POST">
+            <h4 class="ui dividing header">Shipping Information</h4>
+            <div class="field">
+                <label>Name</label>
+                <div class="field">
+                    <input type="text" name="nickname" placeholder="Your nickname">
+                </div>
+            </div>
+            <div class="field">
+                <label>Billing Address</label>
+                <div class="fields">
+                    <div class="twelve wide field">
+                        <input type="text" name="address1" placeholder="Street Address">
+                    </div>
+                    <div class="four wide field">
+                        <input type="text" name="address2" placeholder="Apt #">
+                    </div>
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="field">
+                    <label>State</label>
+                    <div class="ui icon input">
+                        <input type='text' id="State" placeholder="State" class='flexdatalist dropdown' data-data='datajson/vietnam.json' data-search-in='name' data-min-length='0' name='State' onchange='loadState()'>
+                        <i class="dropdown icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>District/Town</label>
+                    <div class="ui icon input">
+                        <input type='text' id="Town" placeholder="District/Town" class='flexdatalist' list="townList" data-selection-required='true' data-min-length='0' name='town'>
+                        <i class="dropdown icon"></i>
+                        <datalist id="townList">
+                                <option value="">District/Town</option>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+            <h4 class="ui dividing header">Billing Information</h4>
+            <div class="fields">
+                <div class="eight wide field">
+                    <label>Wallet Type</label>
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="cardType">
+                        <div class="default text">Type</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item" data-value="visa">
+                                <i class="bitcoin icon"></i> Coinbase
+                            </div>
+                            <div class="item" data-value="amex">
+                                <i class="bitcoin icon"></i> Circle
+                            </div>
+                            <div class="item" data-value="discover">
+                                <i class="bitcoin icon"></i> Bitgo
+                            </div>
+                            <div class="item" data-value="discover">
+                                <i class="bitcoin icon"></i> Mycelium
+                            </div>
+                            <div class="item" data-value="discover">
+                                <i class="bitcoin icon"></i> Blockchain
+                            </div>
+                            <div class="item" data-value="discover">
+                                <i class="bitcoin icon"></i> Armory
+                            </div>
+                            <div class="item" data-value="discover">
+                                <i class="bitcoin icon"></i> Hive
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eight wide field">
+                    <label>Wallet ID</label>
+                    <input type="text" name="walletId" maxlength="16" placeholder="Wallet#ID">
+                </div>
+            </div>
+            <div class="ui segment">
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" name="gift" tabindex="0" class="hidden">
+                        <label>Do not include a receipt in the package</label>
+                    </div>
+                </div>
+            </div>
+            <button class="ui primary button" type="submit">Submit Order</button>
+        </form>
+    </div>
+
+</modal>
+
+<body onload="loadRequest()">
+    <div class="ui fluid main container">
+        <div class="ui internally celled grid">
+            <div class="row">
+                <div class="ui three wide column segment">
+                    <h3 class="ui header">Categories</h3>
+                    <div class="ui list" id="categoryL">
+                        <div class="item">
+                            <div class="ui master checkbox">
+                                <input type="checkbox" name="filter" value="All" onchange="filter()">
+                                <label>All</label>
+                            </div>
+                            <div class="list">
+                                <template v-for="item in items">
+                                        <div class="item">
+                                            <div class="ui child checkbox">
+                                                <input type="checkbox" name="filter" :value="item.name" onchange="filter()">
+                                                <label>{{item.name}}</label>
+                                            </div>
+                                        </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        var appForList2 = new Vue({
+                            el: '#categoryL',
+                            data: {
+                                items: categoriesList
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="ui one wide column"></div>
+                <div class="ui twelve wide column segment" id="mainContent">
+                    <h3 class="ui header" id="searchCount" v-if="show">
+                        <p>{{ counter }} item found
+                    </h3>
+                    <div class="ui three stackable cards">
+
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui center aligned container" id="hasNext" v-if="show">
+                        <button class="ui primary button" onclick="viewMore()">View 30 more items</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script>
+        var searchResult = new Vue({
+            el: "#searchCount",
+            data: {
+                counter: 0,
+                show: false,
+            },
+            methods: {
+                reset: function() {
+                    this.counter = 0;
+                    this.show = false;
+                }
+            }
+        });
+        var cart = new Vue({
+            el: "#cartCount",
+            data: {
+                counter: 0,
+                total: "0.000000"
+            }
+        });
+        var appView = new Vue({
+            el: "#hasNext",
+            data: {
+                show: false
+            }
+        });
+    </script>
+</body>
+
+
+<footer>
+    <div class="ui fColor inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Frameworks/Libraries</h4>
+                    <div class="ui inverted link list">
+                        <a class="animate-underline item" href="https://jquery.com/" target="_blank">JQuery</a>
+                        <a class="animate-underline item" href="https://semantic-ui.com/" target="_blank">Semantic UI</a>
+                        <a class="animate-underline item" href="http://projects.sergiodinislopes.pt/flexdatalist/" target="_blank">FlexDatalist</a>
+                        <a class="animate-underline item" href="https://vuejs.org/" target="_blank">VueJS 2.x</a>
+                        <a class="animate-underline item" href="#" target="_blank">My laptop =))</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui inverted header">Additional data</h4>
+                    <div class="ui inverted link list">
+                        <a class="animate-underline item" href="datajson/countries.json" target="_blank">Country database</a>
+                        <a class="animate-underline item" href="datajson/vietnam.json" target="_blank">Vietnam state database</a>
+                        <a class="animate-underline item" href="datajson/itemList.json" target="_blank">Shop's item database</a>
+                        <a class="animate-underline item" href="datajson/categories.json" target="_blank">Categories database</a>
+                    </div>
+                </div>
+                <div class="eight wide right floated column">
+                    <h3 class="ui inverted teal header">Want to see something special?</h3>
+                    <p>Click this button to see the special things</p>
+                    <a class="ui large red button" href="http://felixx.890m.com/Christmas2016/">Special Gift
+                        <i class="ui chevron right icon"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <img src="src/images/logo.png" class="ui centered mini image">
+            <div class="ui horizontal inverted small divided link list">
+                <div class="item">Designed by
+                    <a class="copyright" href="http://fb.com/assassin1998sd" target="_blank">Felixx</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

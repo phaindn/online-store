@@ -1,0 +1,240 @@
+/*scroll bar*/
+
+::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey!important;
+    /* border-radius: 500rem !important;*/
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: red!important;
+    /*border-radius: 500rem !important;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000!important;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9) !important;
+    /*border-radius: 10px !important;*/
+    background-color: #CCCCCC !important;
+}
+
+::-webkit-scrollbar {
+    width: 12px !important;
+    background-color: #F5F5F5 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    /*border-radius: 10px !important;*/
+    background-color: #D62929 !important;
+    background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4) 50%, transparent, transparent)!important;
+}
+
+
+/*other*/
+
+.inline {
+    display: inline-block !important;
+    padding-right: 1em !important;
+}
+
+a.dot {
+    padding: 0.6em;
+    border: 0em;
+    border-radius: 500rem !important;
+    line-height: 0em;
+    display: inline-block;
+    box-shadow: 0px 0px 2px black, 0 0 10px grey;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+a.black.dot {
+    border-color: black !important;
+    background-color: black !important;
+}
+
+a.blue.dot {
+    border-color: blue !important;
+    background-color: blue;
+}
+
+a.red.dot {
+    border-color: red !important;
+    background-color: red;
+}
+
+a.green.dot {
+    border-color: green !important;
+    background-color: green;
+}
+
+a.yellow.dot {
+    border-color: yellow !important;
+    background-color: yellow;
+}
+
+a.cyan.dot {
+    border-color: cyan !important;
+    background-color: cyan;
+}
+
+a.orange.dot {
+    border-color: orange !important;
+    background-color: orange;
+}
+
+a.pink.dot {
+    border-color: pink !important;
+    background-color: pink;
+}
+
+a.teal.dot {
+    border-color: teal !important;
+    background-color: teal;
+}
+
+a.olive.dot {
+    border-color: olive !important;
+    background-color: olive;
+}
+
+a.white.dot {
+    border-color: rgba(182, 182, 182, 0.795) !important;
+    background-color: rgb(255, 255, 255);
+}
+
+a.grey.dot {
+    border-color: grey !important;
+    background-color: grey;
+}
+
+a.dot:hover {
+    opacity: 0.8;
+}
+
+a.dot.active {
+    border-style: solid !important;
+    background-color: white !important;
+    padding: 0.3em;
+    border: 0.3em;
+}
+
+a.animate-underline {
+    position: relative;
+    text-decoration: none;
+}
+
+a.animate-underline::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(0, 195, 255);
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+a.animate-underline:hover::before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+
+/*other================*/
+
+.scrollable {
+    max-height: 250px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+/* .ui.popup .list {
+    max-height: 250px;
+    overflow: hidden;
+    overflow-y: scroll;
+} */
+
+.hiddenObj {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.card {
+    position: relative!important;
+}
+
+.overlay {
+    position: absolute!important;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.2);
+    /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    padding: 0px;
+    text-align: center;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.footer {
+    margin: 0em !important;
+    border-radius: 0em !important;
+    padding: 4em 0em 4em 0em !important;
+}
+
+.footer>.container {
+    width: 700px !important;
+}
+
+.ui.menu .item img.logo {
+    margin-right: 1.5em !important;
+}
+
+.main.container {
+    margin-top: 7em !important;
+}
+
+.wireframe {
+    margin-top: 2em !important;
+}
+
+.ui.footer.segment {
+    margin: 5em 0em 0em !important;
+    padding: 5em 0em !important;
+}
+
+#counterrr {
+    margin-top: 0.8em !important;
+    padding: 0.3em 0.5em;
+    border-radius: 100em !important;
+}
+
+.fColor {
+    background-color: rgba(43, 43, 43, 0.842) !important;
+}
+
+.ui.fixed.rail {
+    width: 15em !important;
+    position: fixed !important;
+}

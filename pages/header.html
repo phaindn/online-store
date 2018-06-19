@@ -1,0 +1,49 @@
+<div class="ui inverted red fixed menu">
+    <div class="ui container">
+        <a href="#" class="header item">
+            <img class="logo" src="src/images/logo.png"> CryptoShop
+        </a>
+        <div class="item">
+            <div class="ui action icon input" id="searchBox">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <select name="searchType" id="searchType" class="ui selection dropdown">
+                    <option value="">Select category</option>
+                    <option value="all">All type</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="cosmetics">Cosmetics</option>
+                    <option value="device">Device</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="food">Food</option>
+                    <option value="health">Health care</option>
+                    <option value="office">Office</option>
+                    <option value="other">Other</option>
+                </select>
+                <button class="ui icon button" onclick="search()"><i class="ui search icon"></i></button>
+            </div>
+        </div>
+
+        <div class="ui simple dropdown item">
+            Device <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="#">Laptop</a>
+                <a class="item" href="#">Link Item</a>
+                <div class="divider"></div>
+                <div class="header">Header Item</div>
+                <div class="item">
+                    <i class="dropdown icon"></i> Sub Menu
+                    <div class="menu">
+                        <a class="item" href="#">Link Item</a>
+                        <a class="item" href="#">Link Item</a>
+                    </div>
+                </div>
+                <a class="item" href="#">Link Item</a>
+            </div>
+        </div>
+        <div class="right floated item">
+            <button class="ui red  button">
+                <i class="ui cart icon"></i> Cart
+                <div class="floating ui teal label" id="cartCount">99</div>
+            </button>
+        </div>
+    </div>
+</div>
